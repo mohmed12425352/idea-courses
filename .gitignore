@@ -1,0 +1,12 @@
+**/node_modules/
+node_modules/
+Ready-Installers/
+desktop/
+mobile/
+backend/dist/
+backend/data/
+app-ui/dist/
+.env
+*.log
+.DS_Store
+Thumbs.db

@@ -1,0 +1,10 @@
+**/node_modules
+desktop/
+mobile/
+backend/dist
+backend/data
+app-ui/dist
+Ready-Installers/
+backend/public-downloads/
+.git
+*.log

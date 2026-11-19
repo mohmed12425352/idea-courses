@@ -1,0 +1,16 @@
+User-agent: *
+Allow: /
+Disallow: /admin
+Disallow: /admin-setup
+Disallow: /admin/
+Disallow: /dashboard
+Disallow: /chat
+Disallow: /forgot-password
+Disallow: /reset-password
+Disallow: /moderator
+Disallow: /learn/
+Disallow: /checkout/
+Disallow: /payment/
+Disallow: /unsubscribe
+
+Sitemap: https://fekradesign.shalaby3.online/sitemap.xml
