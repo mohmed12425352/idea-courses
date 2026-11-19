@@ -1,3 +1,13 @@
+---
+title: Idea Courses Platform
+emoji: 🎓
+colorFrom: red
+colorTo: yellow
+sdk: docker
+app_port: 4500
+pinned: false
+---
+
 # منظومة التطبيقات المستقلة — Idea Courses Apps (الديسكتوب + الموبايل + داتا بيز سحابية منفصلة)
 
 هذا المجلد (`D:\data\edunova-apps-platform`) هو **نظام مستقل بالكامل 100%** عن نسخة الموقع (`D:\data\edunova-academy-fullstack`)، ومخصّص حصرياً لتشغيل وإدارة **تطبيق الويندوز (`.exe`) وتطبيق الموبايل (`Android .apk` + `iOS`)** بقاعدة بيانات ولوحة تحكم خاصة بهم فقط!
