@@ -6,6 +6,9 @@
 $OutputEncoding = [System.Text.Encoding]::UTF8
 
 $scriptDir = Split-Path -Parent $MyInvocation.MyCommand.Definition
+if (-not $scriptDir -or -not (Test-Path $scriptDir)) {
+    $scriptDir = "D:\data\edunova-apps-platform\backend-csharp"
+}
 $publishDir = Join-Path $scriptDir "publish"
 $toolsDir = Join-Path $scriptDir "tools"
 $cloudflaredPath = Join-Path $toolsDir "cloudflared.exe"
