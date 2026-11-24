@@ -2,8 +2,10 @@
   "name": "idea-courses-apps-platform",
   "version": "2.0.0",
   "private": true,
+  "type": "module",
   "description": "Standalone Cloud-Ready Apps Ecosystem (Independent DB + Node.js API + Windows Protected EXE + Android/iOS Protected Mobile App)",
   "scripts": {
+    "build": "npm run build --prefix app-ui",
     "start:backend": "npm run start --prefix backend",
     "dev:backend": "npm run dev --prefix backend",
     "dev:ui": "npm run dev --prefix app-ui",
@@ -11,5 +13,13 @@
     "build:all": "npm run build --prefix backend && npm run build --prefix app-ui",
     "build:desktop": "npm run dist:portable --prefix desktop",
     "build:apk": "npm run build:apk --prefix mobile"
+  },
+  "dependencies": {
+    "bcryptjs": "^3.0.3",
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.10",
+    "express": "^5.3.0",
+    "jsonwebtoken": "^9.0.3",
+    "pg": "^8.23.1"
   }
 }
