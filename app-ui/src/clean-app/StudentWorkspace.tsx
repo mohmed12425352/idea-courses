@@ -753,7 +753,7 @@ export function StudentWorkspace({
                 {/* Cinema Stage (8 cols) */}
                 <div className="lg:col-span-8 space-y-4">
                   {activeLesson ? (
-                    activeLesson.youtube_video_id ? (
+                    activeLesson.youtube_video_id && !activeLesson.youtube_video_id.startsWith("bunny:") ? (
                       <ShieldedYouTubePlayer
                         key={activeLesson.id}
                         lessonId={activeLesson.id}
@@ -776,6 +776,24 @@ export function StudentWorkspace({
                         }}
                         onEnded={handleMarkLessonComplete}
                       />
+                    ) : (activeLesson.youtube_video_id?.startsWith("bunny:") || activeLesson.attachment_url) ? (
+                      <div className="relative aspect-video rounded-2xl overflow-hidden bg-black border border-violet-500/30 shadow-2xl">
+                        <iframe
+                          src={
+                            activeLesson.attachment_url ||
+                            `https://iframe.mediadelivery.net/embed/${activeLesson.youtube_video_id.replace("bunny:", "").replace(":", "/")}`
+                          }
+                          className="w-full h-full border-0"
+                          allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
+                          allowFullScreen
+                        />
+                        {/* Forensic Anti-Leak Dynamic Watermark */}
+                        <div className="absolute inset-0 pointer-events-none overflow-hidden z-20">
+                          <div className="absolute animate-pulse top-4 right-4 bg-black/60 px-3 py-1.5 rounded-lg border border-white/10 text-[11px] font-mono text-white/70 select-none">
+                            {user?.name || "Student"} • {user?.phone || user?.email || ""} • {dev.shortCode}
+                          </div>
+                        </div>
+                      </div>
                     ) : (
                       <div className="aspect-video rounded-2xl bg-[#15121a] border border-rose-500/30 flex flex-col items-center justify-center p-6 text-center space-y-3">
                         <Lock className="w-10 h-10 text-rose-400" />
