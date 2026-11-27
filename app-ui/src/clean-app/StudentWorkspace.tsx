@@ -26,6 +26,9 @@ import {
   Loader2,
   Hourglass,
   AlertCircle,
+  FileText,
+  Download,
+  CheckSquare,
 } from "lucide-react";
 import { toast } from "sonner";
 import { apiFetch, compressAndUploadReceiptImage, getDeviceIdentity, resolveMediaUrl } from "./api";
@@ -842,16 +845,68 @@ export function StudentWorkspace({
                         </p>
                       )}
 
-                      {activeLesson.attachment_url && (
-                        <a
-                          href={activeLesson.attachment_url}
-                          target="_blank"
-                          rel="noreferrer"
-                          className="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-amber-500/15 border border-amber-500/35 text-amber-300 text-xs font-bold hover:bg-amber-500/25"
-                        >
-                          <ExternalLink className="w-3.5 h-3.5" />
-                          <span>تحميل ملفات وملحقات المحاضرة</span>
-                        </a>
+                      {/* Attached Resources, PDFs, App Links & Tasks */}
+                      <div className="flex flex-wrap gap-2.5 pt-2">
+                        {activeLesson.pdf_url && (
+                          <a
+                            href={activeLesson.pdf_url}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-rose-500/15 border border-rose-500/35 text-rose-300 text-xs font-bold hover:bg-rose-500/25 transition-all shadow-sm"
+                          >
+                            <FileText className="w-4 h-4 text-rose-400" />
+                            <span>📄 تحميل ملخص وملف الـ PDF</span>
+                          </a>
+                        )}
+
+                        {activeLesson.app_download_url && (
+                          <a
+                            href={activeLesson.app_download_url}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-emerald-500/15 border border-emerald-500/35 text-emerald-300 text-xs font-bold hover:bg-emerald-500/25 transition-all shadow-sm"
+                          >
+                            <Download className="w-4 h-4 text-emerald-400" />
+                            <span>📱 رابط تثبيت وتحميل التطبيق / البرنامج</span>
+                          </a>
+                        )}
+
+                        {activeLesson.resource_links && (
+                          <a
+                            href={activeLesson.resource_links}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-cyan-500/15 border border-cyan-500/35 text-cyan-300 text-xs font-bold hover:bg-cyan-500/25 transition-all shadow-sm"
+                          >
+                            <ExternalLink className="w-4 h-4 text-cyan-400" />
+                            <span>🔗 روابط ومراجع الدرس</span>
+                          </a>
+                        )}
+
+                        {activeLesson.attachment_url && (
+                          <a
+                            href={activeLesson.attachment_url}
+                            target="_blank"
+                            rel="noreferrer"
+                            className="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-amber-500/15 border border-amber-500/35 text-amber-300 text-xs font-bold hover:bg-amber-500/25 transition-all shadow-sm"
+                          >
+                            <ExternalLink className="w-4 h-4 text-amber-400" />
+                            <span>ملحقات المحاضرة</span>
+                          </a>
+                        )}
+                      </div>
+
+                      {/* Practical Assignment / Task Box */}
+                      {activeLesson.task_description && (
+                        <div className="rounded-2xl p-4 md:p-5 bg-gradient-to-r from-purple-950/30 to-[#181324] border border-purple-500/35 space-y-2.5 mt-3 shadow-lg">
+                          <div className="flex items-center gap-2 text-purple-300 font-black text-sm">
+                            <CheckSquare className="w-4 h-4 text-purple-400" />
+                            <span>📝 التكليف العملي / التاسك المطلوب من الطالب:</span>
+                          </div>
+                          <p className="text-xs md:text-sm text-slate-300 leading-relaxed whitespace-pre-line bg-black/30 p-3 rounded-xl border border-white/5">
+                            {activeLesson.task_description}
+                          </p>
+                        </div>
                       )}
                     </div>
                   )}

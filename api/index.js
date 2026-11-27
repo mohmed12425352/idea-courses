@@ -298,6 +298,10 @@ app.get("/api/student/courses/:id", authenticate, async (req, res) => {
           video_url: canWatch ? lesson.video_id : null,
           video_type: "youtube",
           watermark_text: canWatch ? `${req.user.name || "Student"} • ${req.user.email || ""}` : null,
+          pdf_url: lesson.pdf_url || null,
+          app_download_url: lesson.app_download_url || null,
+          resource_links: lesson.resource_links || null,
+          task_description: lesson.task_description || null,
         };
       });
 

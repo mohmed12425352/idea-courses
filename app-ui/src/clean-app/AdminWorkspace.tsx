@@ -76,6 +76,10 @@ export function AdminWorkspace({ user, overview, onRefresh, onSwitchToStudentVie
   const [lDuration, setLDuration] = useState("");
   const [lDesc, setLDesc] = useState("");
   const [lAttach, setLAttach] = useState("");
+  const [lPdf, setLPdf] = useState("");
+  const [lAppDownload, setLAppDownload] = useState("");
+  const [lResourceLinks, setLResourceLinks] = useState("");
+  const [lTask, setLTask] = useState("");
   const [lPreview, setLPreview] = useState(false);
 
   // Direct Video -> YouTube Unlisted Upload State
@@ -559,6 +563,10 @@ export function AdminWorkspace({ user, overview, onRefresh, onSwitchToStudentVie
     setLDuration(lesson?.duration_label || "");
     setLDesc(lesson?.description || "");
     setLAttach(lesson?.attachment_url || "");
+    setLPdf(lesson?.pdf_url || "");
+    setLAppDownload(lesson?.app_download_url || "");
+    setLResourceLinks(lesson?.resource_links || "");
+    setLTask(lesson?.task_description || "");
     setLPreview(Boolean(lesson?.is_free_preview));
   };
 
@@ -627,6 +635,10 @@ export function AdminWorkspace({ user, overview, onRefresh, onSwitchToStudentVie
         duration_label: lDuration,
         description: lDesc,
         attachment_url: lAttach,
+        pdf_url: lPdf,
+        app_download_url: lAppDownload,
+        resource_links: lResourceLinks,
+        task_description: lTask,
         is_free_preview: lPreview,
       };
       if (lessonModal.editing?.id) {
@@ -2222,7 +2234,7 @@ export function AdminWorkspace({ user, overview, onRefresh, onSwitchToStudentVie
                   />
                 </div>
                 <div>
-                  <label className="text-xs font-bold text-slate-300 block mb-1">رابط ملف PDF / ملحقات (اختياري)</label>
+                  <label className="text-xs font-bold text-slate-300 block mb-1">ملحقات إضافية (اختياري)</label>
                   <input
                     dir="ltr"
                     value={lAttach}
@@ -2231,6 +2243,51 @@ export function AdminWorkspace({ user, overview, onRefresh, onSwitchToStudentVie
                     className="w-full rounded-xl bg-black/45 border border-white/15 px-3.5 py-2 text-xs text-white outline-none"
                   />
                 </div>
+              </div>
+
+              <div className="grid grid-cols-2 gap-3">
+                <div>
+                  <label className="text-xs font-bold text-rose-300 block mb-1">📄 رابط ملف PDF / ملخص (اختياري)</label>
+                  <input
+                    dir="ltr"
+                    value={lPdf}
+                    onChange={(e) => setLPdf(e.target.value)}
+                    placeholder="https://.../summary.pdf"
+                    className="w-full rounded-xl bg-black/45 border border-white/15 px-3.5 py-2 text-xs text-white outline-none"
+                  />
+                </div>
+                <div>
+                  <label className="text-xs font-bold text-emerald-300 block mb-1">📱 رابط تثبيت التطبيق / البرنامج</label>
+                  <input
+                    dir="ltr"
+                    value={lAppDownload}
+                    onChange={(e) => setLAppDownload(e.target.value)}
+                    placeholder="رابط المتجر أو https://.../app.exe"
+                    className="w-full rounded-xl bg-black/45 border border-white/15 px-3.5 py-2 text-xs text-white outline-none"
+                  />
+                </div>
+              </div>
+
+              <div>
+                <label className="text-xs font-bold text-cyan-300 block mb-1">🔗 روابط ومراجع إضافية للدرس (اختياري)</label>
+                <input
+                  dir="ltr"
+                  value={lResourceLinks}
+                  onChange={(e) => setLResourceLinks(e.target.value)}
+                  placeholder="https://example.com/reference"
+                  className="w-full rounded-xl bg-black/45 border border-white/15 px-3.5 py-2 text-xs text-white outline-none"
+                />
+              </div>
+
+              <div>
+                <label className="text-xs font-bold text-purple-300 block mb-1">📝 نص التاسك / الواجب المطلوب من الطالب (اختياري)</label>
+                <textarea
+                  rows={2}
+                  value={lTask}
+                  onChange={(e) => setLTask(e.target.value)}
+                  placeholder="اكتب التكليف العملي المطلوب من الطالب بعد مشاهدة هذه المحاضرة..."
+                  className="w-full rounded-xl bg-purple-950/25 border border-purple-500/30 px-3.5 py-2 text-xs text-white outline-none focus:border-purple-400"
+                />
               </div>
 
               <div>
