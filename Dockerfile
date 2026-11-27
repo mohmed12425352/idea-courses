@@ -11,6 +11,7 @@ COPY backend ./backend
 COPY app-ui ./app-ui
 
 RUN rm -f ./backend/.env
+RUN mkdir -p ./backend/uploads
 RUN cd app-ui && npm run build
 RUN cd backend && npm run build
 
@@ -23,7 +24,7 @@ COPY --from=builder /app/backend/package.json ./package.json
 COPY --from=builder /app/backend/node_modules ./node_modules
 COPY --from=builder /app/backend/dist ./dist
 COPY --from=builder /app/backend/src/db ./src/db
-COPY --from=builder /app/backend/uploads ./uploads
+RUN mkdir -p ./uploads
 COPY --from=builder /app/app-ui/dist ../app-ui/dist
 
 EXPOSE 4500
