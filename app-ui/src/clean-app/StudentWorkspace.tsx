@@ -778,15 +778,27 @@ export function StudentWorkspace({
                       />
                     ) : (activeLesson.youtube_video_id?.startsWith("bunny:") || activeLesson.attachment_url) ? (
                       <div className="relative aspect-video rounded-2xl overflow-hidden bg-black border border-violet-500/30 shadow-2xl">
-                        <iframe
-                          src={
-                            activeLesson.attachment_url ||
-                            `https://iframe.mediadelivery.net/embed/${activeLesson.youtube_video_id.replace("bunny:", "").replace(":", "/")}`
-                          }
-                          className="w-full h-full border-0"
-                          allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
-                          allowFullScreen
-                        />
+                        {activeLesson.attachment_url?.includes(".mp4") || activeLesson.attachment_url?.includes("r2.dev") ? (
+                          <video
+                            key={activeLesson.id}
+                            src={activeLesson.attachment_url}
+                            controls
+                            controlsList="nodownload"
+                            onContextMenu={(e) => e.preventDefault()}
+                            className="w-full h-full object-contain bg-black"
+                            playsInline
+                          />
+                        ) : (
+                          <iframe
+                            src={
+                              activeLesson.attachment_url ||
+                              `https://iframe.mediadelivery.net/embed/${activeLesson.youtube_video_id.replace("bunny:", "").replace(":", "/")}`
+                            }
+                            className="w-full h-full border-0"
+                            allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture"
+                            allowFullScreen
+                          />
+                        )}
                         {/* Forensic Anti-Leak Dynamic Watermark */}
                         <div className="absolute inset-0 pointer-events-none overflow-hidden z-20">
                           <div className="absolute animate-pulse top-4 right-4 bg-black/60 px-3 py-1.5 rounded-lg border border-white/10 text-[11px] font-mono text-white/70 select-none">
