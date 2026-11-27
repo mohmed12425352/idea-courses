@@ -806,7 +806,7 @@ export function StudentWorkspace({
                           </div>
                         </div>
                       </div>
-                    ) : (
+                    ) : !activeCourse.is_enrolled && !activeLesson.is_free_preview ? (
                       <div className="aspect-video rounded-2xl bg-[#15121a] border border-rose-500/30 flex flex-col items-center justify-center p-6 text-center space-y-3">
                         <Lock className="w-10 h-10 text-rose-400" />
                         <h4 className="text-base font-black text-white">هذه المحاضرة للمشتركين في الكورس فقط</h4>
@@ -834,6 +834,16 @@ export function StudentWorkspace({
                             </span>
                           </button>
                         )}
+                      </div>
+                    ) : (
+                      <div className="aspect-video rounded-2xl bg-[#15121a] border border-amber-500/30 flex flex-col items-center justify-center p-6 text-center space-y-3">
+                        <div className="w-12 h-12 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-amber-400 flex items-center justify-center">
+                          <Play className="w-6 h-6 animate-pulse" />
+                        </div>
+                        <h4 className="text-base font-black text-white">فيديو هذه المحاضرة قيد الرفع والمعالجة السحابية ⏳</h4>
+                        <p className="text-xs text-slate-400 max-w-md leading-relaxed">
+                          أنت مشترك ومفعل في كورس "{activeCourse.title}" بنجاح! جاري رفع ومعالجة الفيديو الخاص بهذه المحاضرة على السحابة، وسيعمل تلقائياً فور اكتمال الرفع.
+                        </p>
                       </div>
                     )
                   ) : (
@@ -913,7 +923,10 @@ export function StudentWorkspace({
                           </a>
                         )}
 
-                        {activeLesson.attachment_url && (
+                        {activeLesson.attachment_url &&
+                          !activeLesson.attachment_url.toLowerCase().includes(".mp4") &&
+                          !activeLesson.attachment_url.includes("r2.dev") &&
+                          !activeLesson.attachment_url.includes("mediadelivery.net") && (
                           <a
                             href={activeLesson.attachment_url}
                             target="_blank"

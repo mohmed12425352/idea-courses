@@ -656,6 +656,10 @@ async function bootstrap() {
                 // Never leak YouTube video ID for locked lessons to un-enrolled students!
                 youtube_video_id: canWatch ? l.youtube_video_id : "",
                 youtube_url: isAdmin ? l.youtube_url : "",
+                pdf_url: canWatch ? l.pdf_url : null,
+                app_download_url: canWatch ? l.app_download_url : null,
+                resource_links: canWatch ? l.resource_links : null,
+                task_description: canWatch ? l.task_description : null,
                 progress: progressMap[l.id] || null,
               };
             }),
