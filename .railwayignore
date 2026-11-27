@@ -8,3 +8,11 @@ Ready-Installers/
 backend/public-downloads/
 .git
 *.log
+*.bat
+tools/
+*.py
+*.cjs
+download_*.json
+r2_uploaded_videos.json
+api/
+backend-csharp/
