@@ -634,7 +634,7 @@ async function bootstrap() {
     }
 
     const courses = coursesRes.rows.map((c: any) => {
-      const isEnrolled = isAdmin || enrolledSet.has(c.id);
+      const isEnrolled = enrolledSet.has(c.id);
       const cSections = sectionsRes.rows
         .filter((s: any) => s.course_id === c.id)
         .map((s: any) => ({
@@ -642,7 +642,7 @@ async function bootstrap() {
           lessons: lessonsRes.rows
             .filter((l: any) => l.section_id === s.id)
             .map((l: any) => {
-              const canWatch = isEnrolled || l.is_free_preview;
+              const canWatch = isAdmin || isEnrolled || l.is_free_preview;
               return {
                 id: l.id,
                 course_id: l.course_id,
